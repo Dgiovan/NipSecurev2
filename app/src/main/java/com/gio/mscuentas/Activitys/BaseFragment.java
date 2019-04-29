@@ -7,6 +7,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.gio.mscuentas.Enums.FragmentType;
+import com.gio.mscuentas.Fragments.addNewCount;
+import com.gio.mscuentas.Fragments.counts;
+import com.gio.mscuentas.Fragments.loging;
+import com.gio.mscuentas.Fragments.pin;
+import com.gio.mscuentas.Fragments.registry;
+import com.gio.mscuentas.Fragments.splash;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 import com.gio.mscuentas.R;
 
@@ -26,16 +32,34 @@ public class BaseFragment extends AppCompatActivity implements OnFragmentInterac
         switch (fragmentType)
         {
             case SPLASH:
+                splash SPLASHFRAGMENT = splash.newInstance(this);
+                fragment.setArguments(args);
+                fragment = SPLASHFRAGMENT;
                 break;
             case LOGING:
+                loging LOGINGFRAGMENT = loging.newInstance(this);
+                fragment.setArguments(args);
+                fragment = LOGINGFRAGMENT;
                 break;
             case REGISTRY:
+                registry REGISTRYFRAGMENT = registry.newInstance(this);
+                fragment.setArguments(args);
+                fragment = REGISTRYFRAGMENT;
                 break;
             case PIN:
+                pin PINFRAGMENT = pin.newInstance(this);
+                fragment.setArguments(args);
+                fragment = PINFRAGMENT;
                 break;
             case COUNTS:
+                counts COUNTSFRAGMENT = counts.newInstance(this);
+                fragment.setArguments(args);
+                fragment = COUNTSFRAGMENT;
                 break;
             case ADDNEWCOUNT:
+                addNewCount ADDCOUNTFRAGMENT = addNewCount.newInstance(this);
+                fragment.setArguments(args);
+                fragment = ADDCOUNTFRAGMENT;
                 break;
 
         }
