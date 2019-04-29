@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".Fragments.registry">
+    <TextView
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorGreenlight"
+        android:fontFamily="serif"
+        android:textSize="30sp"
+        android:text="@string/TextRegistry"/>
+
+    <EditText
+        android:id="@+id/userFieldRegistry"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/hintUser"
+        android:imeOptions="actionNext"
+        android:inputType="textPersonName"
+        android:background="@drawable/simple_roud_fields"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:id="@+id/passwordFieldRegistry"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:imeOptions="actionNext"
+        android:hint="@string/hintPassword"
+        android:background="@drawable/simple_roud_fields"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <EditText
+        android:id="@+id/confirmFieldRegistry"
+        android:gravity="center"
+        android:imeOptions="actionDone"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:hint="@string/hintRepitPassword"
+        android:inputType="textPassword"
+        android:background="@drawable/simple_roud_fields"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
+    <Button
+        android:id="@+id/buttonRegistry"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/backgroundbutton"
+        android:text="@string/ButtonRegistry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"/>
+
+
+
+</LinearLayout>

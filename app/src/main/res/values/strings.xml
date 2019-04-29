@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">msCuentas</string>
+
+    <!-- TextView -->
+    <string name="TextRegistry">Registrar usuario</string>
+    <string name="SelectIcon">Selecciona un icono</string>
+    <string name="inputCount">Nombre de cuenta</string>
+    <string name="inputPassword">Contraseña</string>
+
+    <!-- Hints EditText-->
+    <string name="hintUser">Usuario</string>
+    <string name="hintPassword">Contraseña</string>
+    <string name="hintRepitPassword">Confirmar Contraseña</string>
+    <!--Buttons Texts-->
+    <string name="ButtonLoging">Iniciar sesion</string>
+    <string name="ButtonRegistry">Registrar</string>
+
+
+
+
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.counts">
+
+    <LinearLayout
+        android:layout_weight="8"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/newCount"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/plus"
+            />
+        <ImageView
+            android:id="@+id/seeCount"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/eye"
+            />
+        <ImageView
+            android:id="@+id/logoutCount"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logout"
+            />
+    </LinearLayout>
+<android.support.v7.widget.RecyclerView
+    android:layout_weight="1"
+    android:id="@+id/rcvCounts"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+</android.support.v7.widget.RecyclerView>
+</LinearLayout>
