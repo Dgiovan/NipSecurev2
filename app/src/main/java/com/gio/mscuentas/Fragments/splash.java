@@ -3,6 +3,7 @@ package com.gio.mscuentas.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,13 @@ public static splash newInstance(OnFragmentInteractionListener onFragmentInterac
     fragment.setOnFragmentInteractionListener(onFragmentInteractionListener);
     return fragment;
 }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,8 +49,9 @@ public static splash newInstance(OnFragmentInteractionListener onFragmentInterac
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-
-               onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.LOGING,false,null);
+                Bundle args = new Bundle();
+                args.putString("gio","hola correcto");
+               onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.LOGING,false,args);
             }
         };
 

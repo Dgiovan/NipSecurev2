@@ -128,5 +128,5 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> {
     public int getItemCount() {
         return listaUsuario.size();
     }
-    
+
 }

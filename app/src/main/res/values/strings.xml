@@ -14,8 +14,23 @@
     <!--Buttons Texts-->
     <string name="ButtonLoging">Iniciar sesion</string>
     <string name="ButtonRegistry">Registrar</string>
+    <!--Keystore Texts-->
+    <string name="key_store_alias">MS_CUENTAS</string>
+    <string name="shared_preferences_name">SHARED_PREFERENCES_MSCUENTAS</string>
+    <string name="shared_preferences_key_pin">SHARED_PREFERENCES_KEY_PIN</string>
+    <string name="shared_preferences_key_token">SHARED_PREFERENCES_KEY_TOKEN</string>
+
+    <!-- Keys for passing values -->
+    <string name="key_previous_pin">PREVIOUS_PIN</string>
+    <string name="key_is_unloking">IS_UNLOCKING</string>
+    <!-- Pin retry -->
 
 
+    <string name="key_pin_attempts">PIN_ATTEMPS</string>
+    <string name="key_blocked_timestamp">BLOCKED_TIMESTAMP</string>
+
+    <!-- Background time -->
+    <string name="key_background_time">BACKGROUND_TIME</string>
 
 
 </resources>
