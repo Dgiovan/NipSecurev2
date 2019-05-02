@@ -63,11 +63,10 @@ public class pin extends BaseFragmentListener implements View.OnClickListener {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (getArguments() != null) {
-            Log.e(TAG,"no es nulo");
+
             previousPin = getArguments().getString(getString(R.string.key_previous_pin), "");
             isUnlocking = getArguments().getBoolean(getString(R.string.key_is_unloking), true);
         }

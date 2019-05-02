@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
@@ -38,6 +39,15 @@ public static splash newInstance(OnFragmentInteractionListener onFragmentInterac
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (getArguments() != null){
+            String a = getArguments().getString("gio", "gio");
+            Toast.makeText(getContext(), a, Toast.LENGTH_SHORT).show();
+        }else
+            {
+                Toast.makeText(getContext(), "no", Toast.LENGTH_SHORT).show();
+            }
+
     }
     
 

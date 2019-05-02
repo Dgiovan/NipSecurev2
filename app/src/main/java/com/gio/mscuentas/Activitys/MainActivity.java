@@ -12,7 +12,7 @@ import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Fragments.loging;
 import com.gio.mscuentas.R;
 
-public class MainActivity extends BaseFragment   {
+public class MainActivity extends BaseFragment implements FragmentManager.OnBackStackChangedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,17 @@ public class MainActivity extends BaseFragment   {
                 return;
             }
         }
+        Bundle args = new Bundle();
+        args.putString("gio","hola");
 
-        changeFragment(FragmentType.SPLASH,false,null,null);
+        changeFragment(FragmentType.SPLASH,false,args,null);
+        getSupportFragmentManager().addOnBackStackChangedListener(this);
 
     }
 
 
+    @Override
+    public void onBackStackChanged() {
+
+    }
 }
