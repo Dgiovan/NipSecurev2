@@ -4,7 +4,6 @@ package com.gio.mscuentas.Fragments;
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,10 +14,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.gio.mscuentas.ConexionSQLiteHelper;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 import com.gio.mscuentas.R;
-import com.gio.mscuentas.Utils.ConexionSQLiteHelper;
-import com.gio.mscuentas.Utils.Utilis;
+import com.gio.mscuentas.Utils.Utilidades;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -30,7 +29,7 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
     EditText name,password;
     Button registry;
     View v;
-    Integer iconSelected=0;
+    String iconSelected="";
 
     public addNewCount() {
         // Required empty public constructor
@@ -79,31 +78,31 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         switch (v.getId())
         {
             case R.id.icoOne:
-                iconSelected =1;
+                iconSelected ="1";
                 one.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.icoTwo:
-                iconSelected =2;
+                iconSelected ="2";
                 two.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.icoThree:
                 tree.setBackgroundColor(R.color.colorGreenlight);
-                iconSelected =3;
+                iconSelected ="3";
             break;
             case R.id.iconFor:
-                iconSelected =4;
+                iconSelected ="4";
                 four.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.icoFive:
-                iconSelected =5;
+                iconSelected ="5";
                 five.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.icoSix:
-                iconSelected =6;
+                iconSelected ="6";
                 six.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.icoSeven:
-                iconSelected =7;
+                iconSelected ="7";
                 seven.setBackgroundColor(R.color.colorGreenlight);
             break;
             case R.id.buttonNewCount:
@@ -121,28 +120,26 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         }
         if (password.equals(""))
         {
-            password.setError("Introduce la copntraseña de la cuenta");
+            password.setError("Introduce la contraseña de la cuenta");
         }
-        if (iconSelected==0){
+        if (iconSelected.equals("")){
             Toast.makeText(getActivity(), "Por Favor selecciona un icono", Toast.LENGTH_SHORT).show();
         }
-        if (!name.equals("") && !password.equals("") && iconSelected>1)
+        if (!name.equals("") && !password.equals("") && !iconSelected.equals(""))
         {
-            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getContext(),"bd_cuentas",null,1);
+            ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(),"cuenta",null,1);
 
-            SQLiteDatabase db = conn.getWritableDatabase();
+            SQLiteDatabase db= conn.getWritableDatabase();
+
             ContentValues values = new ContentValues();
 
-            values.put(Utilis.FIELD_ICON, String.valueOf(iconSelected));
-            values.put(Utilis.FIELD_NAME,name.getText().toString());
-            values.put(Utilis.FIELD_PASSWORD,password.getText().toString());
+            values.put(Utilidades.FIELD_ICON,iconSelected);
+            values.put(Utilidades.FIELD_NAME,name.getText().toString());
+            values.put(Utilidades.FIELD_PASSWORD,password.getText().toString());
 
-            Long idResultante=db.insert(Utilis.CREAR_TABLA_CUENTAS,Utilis.FIELD_ICON,values);
-
-            Toast.makeText(getContext(), "Cuenta Registrada", Toast.LENGTH_SHORT).show();
-
+            Long idResult = db.insert(Utilidades.TABLA_CUENTA,Utilidades.FIELD_ICON,values);
+            Toast.makeText(getActivity(), "Cuenta Registrada" +idResult , Toast.LENGTH_SHORT).show();
             db.close();
-
 
         }
     }

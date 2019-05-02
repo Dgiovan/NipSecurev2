@@ -1,25 +1,28 @@
-package com.gio.mscuentas.Models;
-
-import android.widget.ImageView;
-
-public class countModel {
+package com.gio.mscuentas.Entidades;
 
 
-    private Integer icon;
+import java.io.Serializable;
+
+public class countModel implements Serializable {
+
+
+    private String icon;
     private String nameCount;
     private String passworCount;
 
-   /* public countModel(Integer icon, String nameCount, String passworCount) {
+    public countModel(String icon, String nameCount, String passworCount) {
         this.icon = icon;
         this.nameCount = nameCount;
         this.passworCount = passworCount;
-    }*/
+    }
 
-    public int getIcon() {
+    public countModel()
+    {}
+    public String getIcon() {
         return icon;
     }
 
-    public void setIcon(int icon) {
+    public void setIcon(String icon) {
         this.icon = icon;
     }
 
