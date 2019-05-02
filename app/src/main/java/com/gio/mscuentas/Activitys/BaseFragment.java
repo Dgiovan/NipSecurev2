@@ -35,32 +35,32 @@ public class BaseFragment extends AppCompatActivity implements OnFragmentInterac
         {
             case SPLASH:
                 splash SPLASHFRAGMENT = splash.newInstance(this);
-                fragment.setArguments(args);
+                SPLASHFRAGMENT.setArguments(args);
                 fragment = SPLASHFRAGMENT;
                 break;
             case LOGING:
                 loging LOGINGFRAGMENT = loging.newInstance(this);
-                fragment.setArguments(args);
+                LOGINGFRAGMENT.setArguments(args);
                 fragment = LOGINGFRAGMENT;
                 break;
             case REGISTRY:
                 registry REGISTRYFRAGMENT = registry.newInstance(this);
-                fragment.setArguments(args);
+                REGISTRYFRAGMENT.setArguments(args);
                 fragment = REGISTRYFRAGMENT;
                 break;
             case PIN:
                 pin PINFRAGMENT = pin.newInstance(this);
-                fragment.setArguments(args);
+                PINFRAGMENT.setArguments(args);
                 fragment = PINFRAGMENT;
                 break;
             case COUNTS:
                 counts COUNTSFRAGMENT = counts.newInstance(this);
-                fragment.setArguments(args);
+                COUNTSFRAGMENT.setArguments(args);
                 fragment = COUNTSFRAGMENT;
                 break;
             case ADDNEWCOUNT:
                 addNewCount ADDCOUNTFRAGMENT = addNewCount.newInstance(this);
-                fragment.setArguments(args);
+                ADDCOUNTFRAGMENT.setArguments(args);
                 fragment = ADDCOUNTFRAGMENT;
                 break;
 
