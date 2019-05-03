@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">msCuentas</string>
+    <string name="app_name"></string>
 
     <!-- Logout Operations-->
     <string name="Logout">OPERATIONS_LOGOUT</string>
