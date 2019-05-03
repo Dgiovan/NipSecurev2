@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -323,14 +322,6 @@ public class pin extends BaseFragmentListener implements View.OnClickListener {
     private boolean savePinToKeyStore(String pin) {
         return KeyStoreHelper.getInstance().savePin(pin);
     }
-
-/*    private void showBiometricsScreen() {
-        SharedPreferences pref = getActivity().getSharedPreferences(getString(R.string.shared_preferences_name), Context.MODE_PRIVATE);
-        SharedPreferences.Editor edit = pref.edit();
-        edit.remove(getString(R.string.key_background_time));
-        edit.commit();
-        onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.COUNTS, true, null);
-    }*/
 
     private void showPinConfirmation(String pin) {
         Bundle args = new Bundle();

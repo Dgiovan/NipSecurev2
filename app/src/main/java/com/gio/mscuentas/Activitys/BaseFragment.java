@@ -1,13 +1,9 @@
 package com.gio.mscuentas.Activitys;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-
 import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Fragments.addNewCount;
 import com.gio.mscuentas.Fragments.counts;
@@ -77,22 +73,9 @@ public class BaseFragment extends AppCompatActivity implements OnFragmentInterac
         fragmentTransaction.replace(R.id.mainContainer, fragment).commitAllowingStateLoss();
     }
 
-    protected void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
-        View view = getCurrentFocus();
-        if (view == null) {
-            view = new View(this);
-        }
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
 
     @Override
     public void onFragmentInteractionChangeFragment(FragmentType fragmentType, boolean addToBackStack, Bundle args) {
         changeFragment(fragmentType, addToBackStack, args, null);
-    }
-
-    @Override
-    public void onHideKeyboard() {
-        hideKeyboard();
     }
 }

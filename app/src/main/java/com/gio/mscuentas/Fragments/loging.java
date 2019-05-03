@@ -1,10 +1,9 @@
 package com.gio.mscuentas.Fragments;
 
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
@@ -56,18 +54,8 @@ public static loging newInstance(OnFragmentInteractionListener onFragmentInterac
         userCredential =KeyStoreHelper.getInstance().readToken();
         loging= v.findViewById(R.id.buttonLogin);
         registry = v.findViewById(R.id.tvregistryLoging);
-
         user = v.findViewById(R.id.userFielLoging);
         password = v.findViewById(R.id.passwordFieldLoging);
-        if (getArguments() !=null)
-        {
-            String a = getArguments().getString("gio", "no");
-            Toast.makeText(getActivity(), a, Toast.LENGTH_SHORT).show();
-        }if (getArguments()==null)
-        {
-            Toast.makeText(getActivity(), "que pedo", Toast.LENGTH_SHORT).show();
-        }
-
         registry.setOnClickListener(this);
         // Inflate the layout for this fragment
 
@@ -98,8 +86,9 @@ public static loging newInstance(OnFragmentInteractionListener onFragmentInterac
             if (userCredentials.equals(userCredential))
             {
                 Bundle args = new Bundle();
-                args.putBoolean(getString(R.string.key_is_unloking), false);
+                args.putBoolean(getString(R.string.key_is_unloking), checkForPin());
                 Log.e(TAG,args.toString());
+                LogoutOperations();
                 onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.PIN,false, args);
 
             }else
@@ -119,5 +108,14 @@ public static loging newInstance(OnFragmentInteractionListener onFragmentInterac
             keyChainHasPin = true;
         }
         return keyChainHasPin;
+    }
+
+
+    public void LogoutOperations() {
+        SharedPreferences sharedPreferences =  PreferenceManager
+                .getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(getString(R.string.Logout),false);
+        editor.apply();
     }
 }

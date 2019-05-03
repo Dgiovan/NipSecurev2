@@ -130,7 +130,6 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(),"cuenta",null,1);
 
             SQLiteDatabase db= conn.getWritableDatabase();
-
             ContentValues values = new ContentValues();
 
             values.put(Utilidades.FIELD_ICON,iconSelected);

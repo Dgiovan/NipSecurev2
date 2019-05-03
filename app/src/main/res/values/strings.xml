@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">msCuentas</string>
 
+    <!-- Logout Operations-->
+    <string name="Logout">OPERATIONS_LOGOUT</string>
     <!-- TextView -->
     <string name="TextRegistry">Registrar usuario</string>
     <string name="SelectIcon">Selecciona un icono</string>

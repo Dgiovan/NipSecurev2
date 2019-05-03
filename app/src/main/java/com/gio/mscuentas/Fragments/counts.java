@@ -1,16 +1,28 @@
 package com.gio.mscuentas.Fragments;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.support.annotation.Nullable;
+import android.support.v13.view.inputmethod.EditorInfoCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.menu.MenuItemImpl;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,12 +44,21 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
     private static final String TAG = counts.class.getSimpleName();
     View v;
-    ImageView addnewcount;
+    ImageView addnewcount,logout;
     ArrayList<countModel> listCount;
     RecyclerView rvcCounts;
     ConexionSQLiteHelper conn;
+    countAdapter adapter;
+    AlertDialog alertDialog;
+    int showhiden=0;
     public counts() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     public  static counts newInstance(OnFragmentInteractionListener onFragmentInteractionListener)
@@ -51,12 +72,10 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_counts, container, false);
         addnewcount = v.findViewById(R.id.newCount);
-        addnewcount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.ADDNEWCOUNT,true,null);
-            }
-        });
+        addnewcount.setOnClickListener(this);
+        logout = v.findViewById(R.id.logoutCount);
+        logout.setOnClickListener(this);
+
         rvcCounts  = v.findViewById(R.id.rcvCounts);
 
 
@@ -66,7 +85,7 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
             rvcCounts.setLayoutManager(new LinearLayoutManager(getContext()));
             getCounts();
-            countAdapter adapter = new countAdapter(getContext(),listCount);
+            adapter = new countAdapter(getContext(),listCount);
             adapter.setListener(this);
             adapter.setSpesifcListener(this);
 
@@ -93,7 +112,6 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
             cuenta.setIcon(cursor.getString(0));
             cuenta.setNameCount(cursor.getString(1));
             cuenta.setPassworCount(cursor.getString(2));
-
             listCount.add(cuenta);
 
         }
@@ -101,14 +119,93 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.shearchcounts, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView  searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+    }
+/*
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.shearchcounts, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView  searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
+    }*/
+
+    @Override
     public void onClick(View v) {
 
-        switch(getId())
+        switch(v.getId())
         {
             case R.id.newCount:
                 onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.ADDNEWCOUNT,true,null);
                 break;
+            case R.id.logoutCount:
+                if (alertDialog == null) {
+                    alertDialog = new AlertDialog.Builder(getActivity() ).create();
+                    alertDialog.setCancelable(false);
+                    alertDialog.setTitle("msCuentas");
+                    alertDialog.setMessage("¿Estás seguro de querer cerrar sesión?");
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Cerrar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    LogoutOperations();
+                                    dialog.dismiss();
+                                    alertDialog = null;
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                    alertDialog = null;
+                                }
+                            });
+                    alertDialog.show();
+                }
+
+                break;
         }
+    }
+
+
+    public void changeItem(int position,String text)
+    {
+        listCount.get(position).ChangeTexts(text);
+        adapter.notifyItemChanged(position);
     }
 
     @Override
@@ -120,7 +217,29 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
     @Override
     public void onSpesificItem(View view, int Position) {
-        String item = listCount.get(Position).getPassworCount();
-        Toast.makeText(getContext(), item, Toast.LENGTH_SHORT).show();
+        Log.e(TAG,String.valueOf(showhiden));
+        if (showhiden==0)
+        {
+            changeItem(Position,listCount.get(Position).getPassworCount());
+            countModel model = new countModel();
+            model.setHidenPasword(listCount.get(Position).getPassworCount());
+            showhiden += 1;
+        }else  if (showhiden!=0)
+        {
+            changeItem(Position,"***********");
+            countModel model = new countModel();
+            model.setHidenPasword("***********");
+            showhiden = 0;
+        }
+
+    }
+
+    public void LogoutOperations() {
+        SharedPreferences sharedPreferences =  PreferenceManager
+                .getDefaultSharedPreferences(getContext());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(getString(R.string.Logout),true);
+        editor.apply();
+        onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.LOGING,false,null);
     }
 }
