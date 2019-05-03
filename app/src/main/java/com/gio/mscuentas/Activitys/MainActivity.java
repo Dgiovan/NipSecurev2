@@ -28,13 +28,6 @@ public class MainActivity extends BaseFragment{
 
 
     }
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (isLogout==false){
-            changeFragment(FragmentType.PIN,false,null,null);
-        }
 
-    }
 
 }

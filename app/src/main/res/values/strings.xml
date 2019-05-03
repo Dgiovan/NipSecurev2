@@ -8,6 +8,9 @@
     <string name="SelectIcon">Selecciona un icono</string>
     <string name="inputCount">Nombre de cuenta</string>
     <string name="inputPassword">Contraseña</string>
+    <string name="usewNEw">Aun notienes cuentas \nPuedes agrear una\n dando clic en este icono</string>
+    <string name="delateitem">Borrar</string>
+
 
     <!-- Hints EditText-->
     <string name="hintUser">Usuario</string>

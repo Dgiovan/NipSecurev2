@@ -41,6 +41,10 @@
                     android:src="@drawable/creditcards" />
 
                 <ImageView
+                    android:paddingLeft="2dp"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="1dp"
+                    android:paddingRight="2dp"
                     android:id="@+id/icoTwo"
                     android:layout_width="55dp"
                     android:layout_height="55dp"

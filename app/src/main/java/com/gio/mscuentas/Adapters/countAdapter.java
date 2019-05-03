@@ -1,30 +1,36 @@
 package com.gio.mscuentas.Adapters;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.gio.mscuentas.Fragments.counts;
+import com.gio.mscuentas.ConexionSQLiteHelper;
 import com.gio.mscuentas.Interfaces.ItemClickListener;
 import com.gio.mscuentas.Entidades.countModel;
 import com.gio.mscuentas.R;
+import com.gio.mscuentas.Utils.Utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Collections.addAll;
 
 public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> implements Filterable {
 
     ArrayList<countModel> listaUsuario;
     ArrayList<countModel> listFullCounts;
+
+    ConexionSQLiteHelper conn;
     Context context;
     private ItemClickListener clickListener;
     public countAdapter(Context context,ArrayList<countModel> listaUsuario)
@@ -45,13 +51,28 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
         TextView  named;
         TextView  pasword;
         ImageView see;
+       public RelativeLayout idLayoutitem;
         public VHcount(@NonNull View itemView,final ItemClickListener listener) {
             super(itemView);
             icon = itemView.findViewById(R.id.iconItem);
             named = itemView.findViewById(R.id.nameItem);
             pasword = itemView.findViewById(R.id.passwordItem);
             see = itemView.findViewById(R.id.seeItem);
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            idLayoutitem = itemView.findViewById(R.id.idLayoutitem);
+
+            /*itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            clickListener.onItemClick(v, getAdapterPosition());
+                        }
+                    }
+                }
+            });*/
+
+            /*itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (listener != null)
@@ -63,19 +84,6 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
 
                     }
                     return false;
-                }
-            });/*setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null)
-                    {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            clickListener.onItemClick(v,getAdapterPosition());
-                        }
-
-
-                    }
                 }
             });*/
             see.setOnClickListener(new View.OnClickListener() {
@@ -94,6 +102,13 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
 
         }
     }
+
+    public void removeItem(int position)
+    {
+        listaUsuario.get(position);
+        notifyItemRemoved(position);
+    }
+
     public void setListener(ItemClickListener itemClickListener)
     {
         this.clickListener = itemClickListener;

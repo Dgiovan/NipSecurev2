@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,31 +80,75 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         {
             case R.id.icoOne:
                 iconSelected ="1";
-                one.setBackgroundColor(R.color.colorGreenlight);
+               // one.setBackgroundColor(R.color.colorGreenlight);
+
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoTwo:
                 iconSelected ="2";
-                two.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoThree:
-                tree.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 iconSelected ="3";
             break;
             case R.id.iconFor:
                 iconSelected ="4";
-                four.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoFive:
                 iconSelected ="5";
-                five.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoSix:
                 iconSelected ="6";
-                six.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoSeven:
                 iconSelected ="7";
-                seven.setBackgroundColor(R.color.colorGreenlight);
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
             break;
             case R.id.buttonNewCount:
                 postnewCount();

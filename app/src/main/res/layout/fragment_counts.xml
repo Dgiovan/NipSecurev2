@@ -6,8 +6,29 @@
     android:orientation="vertical"
     tools:context=".Fragments.counts">
 
+    <LinearLayout
+        android:id="@+id/imageNewuser"
+        android:visibility="invisible"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_add_circle_outline_gray_24dp"/>
+        <TextView
+            android:gravity="center"
+            android:textColor="@color/colorgray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/usewNEw"/>
+    </LinearLayout>
 
 <android.support.v7.widget.RecyclerView
+    android:visibility="gone"
     android:layout_marginTop="20dp"
     android:layout_weight="1"
     android:id="@+id/rcvCounts"
@@ -21,7 +42,8 @@
         android:orientation="horizontal"
         android:layout_height="match_parent">
         <ImageView
-            android:background="@drawable/simple_roud_fields"
+            android:outlineAmbientShadowColor="@color/colorCoral"
+            android:outlineSpotShadowColor="@color/colorBlue"
             android:id="@+id/newCount"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
@@ -29,17 +51,10 @@
             android:layout_height="50dp"
             android:src="@drawable/ic_add_circle_outline_black_24dp"
             />
-       <!-- <ImageView
-            android:background="@drawable/simple_roud_fields"
-            android:id="@+id/seeCount"
-            android:layout_weight="1"
-            android:layout_marginLeft="5dp"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/eye"
-            />-->
+
         <ImageView
-            android:background="@drawable/simple_roud_fields"
+            android:outlineAmbientShadowColor="@color/colorCoral"
+            android:outlineSpotShadowColor="@color/colorBlue"
             android:id="@+id/logoutCount"
             android:layout_weight="1"
             android:layout_marginLeft="5dp"

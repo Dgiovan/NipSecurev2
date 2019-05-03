@@ -15,6 +15,7 @@ import android.support.v7.view.menu.MenuItemImpl;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,8 +25,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gio.mscuentas.Adapters.RecyclerItemTouchHelper;
 import com.gio.mscuentas.Adapters.countAdapter;
 import com.gio.mscuentas.ConexionSQLiteHelper;
 import com.gio.mscuentas.Enums.FragmentType;
@@ -40,7 +43,7 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class counts extends BaseFragmentListener implements View.OnClickListener , ItemClickListener {
+public class counts extends BaseFragmentListener implements View.OnClickListener , ItemClickListener , RecyclerItemTouchHelper.RecyclerItemTouchHelperListener {
 
     private static final String TAG = counts.class.getSimpleName();
     View v;
@@ -51,6 +54,8 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
     countAdapter adapter;
     AlertDialog alertDialog;
     int showhiden=0;
+    boolean isLogout;
+    LinearLayout Layoutcoun;
     public counts() {
         // Required empty public constructor
     }
@@ -58,6 +63,8 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SharedPreferences sharedPreferences =  PreferenceManager.getDefaultSharedPreferences(getContext());
+        isLogout = sharedPreferences.getBoolean(getString(R.string.Logout), false);
         setHasOptionsMenu(true);
     }
 
@@ -72,32 +79,59 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_counts, container, false);
         addnewcount = v.findViewById(R.id.newCount);
+        Layoutcoun = v.findViewById(R.id.imageNewuser);
+        Layoutcoun.setOnClickListener(this);
         addnewcount.setOnClickListener(this);
         logout = v.findViewById(R.id.logoutCount);
         logout.setOnClickListener(this);
 
         rvcCounts  = v.findViewById(R.id.rcvCounts);
 
+        initRecycler();
 
-        try {
-            conn = new ConexionSQLiteHelper(getContext(),"cuenta",null,1);
-            listCount= new ArrayList<>();
-
-            rvcCounts.setLayoutManager(new LinearLayoutManager(getContext()));
-            getCounts();
-            adapter = new countAdapter(getContext(),listCount);
-            adapter.setListener(this);
-            adapter.setSpesifcListener(this);
-
-            rvcCounts.setAdapter(adapter);
-        }catch (Exception e){
-            Log.e(TAG,e.toString());
-        }
 
 
 
 
         return v;
+    }
+
+    private void initRecycler() {
+        try {
+
+            conn = new ConexionSQLiteHelper(getContext(),"cuenta",null,1);
+            listCount= new ArrayList<>();
+            rvcCounts.setLayoutManager(new LinearLayoutManager(getContext()));
+            getCounts();
+            adapter = new countAdapter(getContext(),listCount);
+            adapter.setListener(this);
+            adapter.setSpesifcListener(this);
+            rvcCounts.setAdapter(adapter);
+
+
+            ItemTouchHelper.SimpleCallback simpleCallback =
+                    new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,counts.this);
+
+            new ItemTouchHelper(simpleCallback).attachToRecyclerView(rvcCounts);
+
+            getVisibilitys();
+        }catch (Exception e){
+            Log.e(TAG,e.toString());
+
+        }
+    }
+
+    private void getVisibilitys() {
+
+
+        if (listCount ==null || listCount.isEmpty() )
+        {
+            Layoutcoun.setVisibility(View.VISIBLE);
+        }else
+        {
+            rvcCounts.setVisibility(View.VISIBLE);
+            Layoutcoun.setVisibility(View.GONE);
+        }
     }
 
     private void getCounts() {
@@ -140,36 +174,14 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
             }
         });
     }
-/*
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.shearchcounts, menu);
-        super.onCreateOptionsMenu(menu,inflater);
 
-        MenuItem searchItem = menu.findItem(R.id.action_search);
-        SearchView  searchView = (SearchView) searchItem.getActionView();
-
-        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                return false;
-            }
-        });
-        return true;
-    }*/
 
     @Override
     public void onClick(View v) {
 
         switch(v.getId())
         {
+            case R.id.imageNewuser:
             case R.id.newCount:
                 onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.ADDNEWCOUNT,true,null);
                 break;
@@ -233,7 +245,13 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
         }
 
     }
+    @Override
+    public void onResume() {
+        super.onResume();
+        getVisibilitys();
 
+
+    }
     public void LogoutOperations() {
         SharedPreferences sharedPreferences =  PreferenceManager
                 .getDefaultSharedPreferences(getContext());
@@ -241,5 +259,22 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
         editor.putBoolean(getString(R.string.Logout),true);
         editor.apply();
         onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.LOGING,false,null);
+    }
+
+    @Override
+    public void onSwipe(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+
+        adapter.removeItem(viewHolder.getAdapterPosition());
+
+        SQLiteDatabase db = conn.getWritableDatabase();
+        String [] parametros ={listCount.get(position).getNameCount()};
+        db.delete(Utilidades.TABLA_CUENTA,Utilidades.FIELD_NAME+"=?",parametros);
+        //Toast.makeText(context, listaUsuario.get(position).getNameCount(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Cuenta Eliminada"  , Toast.LENGTH_SHORT).show();
+        db.close();
+        initRecycler();
+
+
+
     }
 }

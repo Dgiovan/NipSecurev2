@@ -61,6 +61,11 @@ public static splash newInstance(OnFragmentInteractionListener onFragmentInterac
             public void run() {
 
                 String havePing = KeyStoreHelper.getInstance().readPin();
+                if (havePing.equals(""))
+                {
+                    onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.LOGING, false, null);
+
+                }
                 if (!havePing.equals("") && isLogout== false)
                 {
                     onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.PIN,false,null);
