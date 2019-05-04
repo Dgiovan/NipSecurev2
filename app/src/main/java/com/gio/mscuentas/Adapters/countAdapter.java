@@ -54,26 +54,12 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
        public RelativeLayout idLayoutitem;
         public VHcount(@NonNull View itemView,final ItemClickListener listener) {
             super(itemView);
-
-
-
             icon = itemView.findViewById(R.id.iconItem);
             named = itemView.findViewById(R.id.nameItem);
             pasword = itemView.findViewById(R.id.passwordItem);
             see = itemView.findViewById(R.id.seeItem);
             idLayoutitem = itemView.findViewById(R.id.idLayoutitem);
 
-            /*itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            clickListener.onItemClick(v, getAdapterPosition());
-                        }
-                    }
-                }
-            });*/
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
