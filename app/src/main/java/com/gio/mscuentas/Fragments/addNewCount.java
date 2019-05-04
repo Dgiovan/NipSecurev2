@@ -20,6 +20,8 @@ import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 import com.gio.mscuentas.R;
 import com.gio.mscuentas.Utils.Utilidades;
 
+import java.util.Random;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -172,13 +174,20 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         }
         if (!name.equals("") && !password.equals("") && !iconSelected.equals(""))
         {
+
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(),"cuenta",null,1);
+
+            Random aleatorio =new Random(System.currentTimeMillis());
+            int intAleatorio = aleatorio.nextInt(900);
+            aleatorio.setSeed(System.currentTimeMillis());
+
+            String keyCountType = String.valueOf(intAleatorio);
 
             SQLiteDatabase db= conn.getWritableDatabase();
             ContentValues values = new ContentValues();
 
             values.put(Utilidades.FIELD_ICON,iconSelected);
-            values.put(Utilidades.FIELD_NAME,name.getText().toString());
+            values.put(Utilidades.FIELD_NAME,name.getText().toString()+"#a!%bc"+keyCountType);
             values.put(Utilidades.FIELD_PASSWORD,password.getText().toString());
 
             Long idResult = db.insert(Utilidades.TABLA_CUENTA,Utilidades.FIELD_ICON,values);

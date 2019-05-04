@@ -5,12 +5,12 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorRed">
+        android:background="@drawable/backgroudelateitem">
 
         <ImageView
             android:id="@+id/imagedelated"
@@ -37,8 +37,9 @@
         android:id="@+id/idLayoutitem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <!--     android:id="@+id/idLayoutitem"-->
         <LinearLayout
-            android:id="@+id/idLayoutitem"
+
             android:visibility="visible"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"

@@ -327,7 +327,7 @@ public class pin extends BaseFragmentListener implements View.OnClickListener {
         Bundle args = new Bundle();
         args.putString(getString(R.string.key_previous_pin), pin);
         args.putBoolean(getString(R.string.key_is_unloking), false);
-        onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.PIN, true, args);
+        onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.PIN, false, args);
     }
 
     private void handlePinAttempts(boolean success) {

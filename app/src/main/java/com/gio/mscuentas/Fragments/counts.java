@@ -111,7 +111,6 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
             ItemTouchHelper.SimpleCallback simpleCallback =
                     new RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,counts.this);
-
             new ItemTouchHelper(simpleCallback).attachToRecyclerView(rvcCounts);
 
             getVisibilitys();
@@ -269,7 +268,6 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
         SQLiteDatabase db = conn.getWritableDatabase();
         String [] parametros ={listCount.get(position).getNameCount()};
         db.delete(Utilidades.TABLA_CUENTA,Utilidades.FIELD_NAME+"=?",parametros);
-        //Toast.makeText(context, listaUsuario.get(position).getNameCount(), Toast.LENGTH_SHORT).show();
         Toast.makeText(getActivity(), "Cuenta Eliminada"  , Toast.LENGTH_SHORT).show();
         db.close();
         initRecycler();

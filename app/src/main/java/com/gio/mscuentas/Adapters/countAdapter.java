@@ -54,6 +54,9 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
        public RelativeLayout idLayoutitem;
         public VHcount(@NonNull View itemView,final ItemClickListener listener) {
             super(itemView);
+
+
+
             icon = itemView.findViewById(R.id.iconItem);
             named = itemView.findViewById(R.id.nameItem);
             pasword = itemView.findViewById(R.id.passwordItem);
@@ -72,7 +75,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
                 }
             });*/
 
-            /*itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     if (listener != null)
@@ -85,7 +88,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
                     }
                     return false;
                 }
-            });*/
+            });
             see.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -131,7 +134,12 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
     @Override
     public void onBindViewHolder(@NonNull VHcount holder, int position) {
         //countModel countmodel = listaUsuario.get(position);
-        holder.named.setText(listaUsuario.get(position).getNameCount().toString());
+        String nameCount = listaUsuario.get(position).getNameCount();
+        String string = nameCount;
+        String[] parts = string.split("#a!%bc");
+        String name = parts[0]; // 19
+        String key = parts[1];
+        holder.named.setText(name);
       //  String pasword = listaUsuario.get(position).getPassworCount();
         holder.pasword.setText(listaUsuario.get(position).getHidenPasword());
 
