@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gio.mscuentas.ConexionSQLiteHelper;
+import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 import com.gio.mscuentas.R;
 import com.gio.mscuentas.Utils.Utilidades;
@@ -193,7 +194,7 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
             Long idResult = db.insert(Utilidades.TABLA_CUENTA,Utilidades.FIELD_ICON,values);
             Toast.makeText(getActivity(), "Cuenta Registrada" +idResult , Toast.LENGTH_SHORT).show();
             db.close();
-
+            onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.COUNTS,false,null);
         }
     }
 }

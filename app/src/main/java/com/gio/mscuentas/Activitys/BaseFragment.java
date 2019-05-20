@@ -1,6 +1,7 @@
 package com.gio.mscuentas.Activitys;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -22,7 +23,7 @@ public class BaseFragment extends AppCompatActivity implements OnFragmentInterac
         super.onCreate(savedInstanceState);
     }
 
-    protected void changeFragment(FragmentType fragmentType, boolean addToBackStack, Bundle args, Fragment targetFragment)
+    protected void changeFragment(FragmentType fragmentType, boolean addToBackStack, @Nullable Bundle args, Fragment targetFragment)
     {
 
         Fragment fragment = new Fragment();
