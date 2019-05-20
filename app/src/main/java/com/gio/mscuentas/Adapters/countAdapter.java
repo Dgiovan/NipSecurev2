@@ -14,14 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.gio.mscuentas.ConexionSQLiteHelper;
 import com.gio.mscuentas.Interfaces.ItemClickListener;
 import com.gio.mscuentas.Entidades.countModel;
 import com.gio.mscuentas.R;
-import com.gio.mscuentas.Utils.Utilidades;
-
 import java.util.ArrayList;
 import java.util.List;
 
