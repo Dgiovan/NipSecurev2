@@ -26,7 +26,7 @@ import java.util.TimerTask;
  */
 public class splash extends BaseFragmentListener {
     private static final String TAG = splash.class.getSimpleName();
-    public static final long SPLASH=2000;
+    private static final long SPLASH=2000;
     private Boolean isLogout;
     View v;
 
@@ -77,7 +77,6 @@ public static splash newInstance(OnFragmentInteractionListener onFragmentInterac
 
         Timer timer = new Timer();
         timer.schedule(task,SPLASH);
-
         return v;
     }
 
