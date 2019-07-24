@@ -5,6 +5,7 @@
     <string name="Logout">OPERATIONS_LOGOUT</string>
     <!-- TextView -->
     <string name="TextRegistry">Registrar usuario</string>
+    <string name="TextLostCount">Olvide mis usuario</string>
     <string name="SelectIcon">Selecciona un icono</string>
     <string name="inputCount">Nombre de cuenta</string>
     <string name="inputPassword">Contraseña</string>

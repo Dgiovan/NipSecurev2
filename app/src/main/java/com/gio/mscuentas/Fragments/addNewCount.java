@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.gio.mscuentas.ConexionSQLiteHelper;
+import com.gio.mscuentas.Enums.FragmentType;
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 import com.gio.mscuentas.R;
 import com.gio.mscuentas.Utils.Utilidades;
@@ -28,11 +31,12 @@ import java.util.Random;
 public class addNewCount extends BaseFragmentListener implements View.OnClickListener
 {
     private static final String TAG = addNewCount.class.getSimpleName();
-    ImageView one,two,tree,four,five,six,seven;
+    ImageView one,two,tree,four,five,six,seven,eigth,nine,back;
     EditText name,password;
     Button registry;
     View v;
     String iconSelected="";
+
 
     public addNewCount() {
         // Required empty public constructor
@@ -62,6 +66,13 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         six.setOnClickListener(this);
         seven = v.findViewById(R.id.icoSeven);
         seven.setOnClickListener(this);
+        eigth = v.findViewById(R.id.icoEigth);
+        eigth.setOnClickListener(this);
+        nine = v.findViewById(R.id.icoNine);
+        nine.setOnClickListener(this);
+
+        back = v.findViewById(R.id.icback);
+        back.setOnClickListener(this);
 
         name = v.findViewById(R.id.nameCountNewCount);
         password = v.findViewById(R.id.passworNewCount);
@@ -82,8 +93,6 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         {
             case R.id.icoOne:
                 iconSelected ="1";
-               // one.setBackgroundColor(R.color.colorGreenlight);
-
                 one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
                 two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
@@ -91,6 +100,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoTwo:
                 iconSelected ="2";
@@ -101,6 +112,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoThree:
                 one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
@@ -110,6 +123,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 iconSelected ="3";
             break;
             case R.id.iconFor:
@@ -121,6 +136,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoFive:
                 iconSelected ="5";
@@ -131,6 +148,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoSix:
                 iconSelected ="6";
@@ -141,6 +160,8 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
             case R.id.icoSeven:
                 iconSelected ="7";
@@ -151,9 +172,40 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
                 five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
                 seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
             break;
+            case R.id.icoEigth:
+                iconSelected ="8";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                break;
+            case R.id.icoNine:
+                iconSelected ="9";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                break;
+
             case R.id.buttonNewCount:
                 postnewCount();
+                break;
+
+            case R.id.icback:
+                onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.COUNTS, false, null);
                 break;
         }
     }
@@ -176,7 +228,6 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
         {
 
             ConexionSQLiteHelper conn = new ConexionSQLiteHelper(getActivity(),"cuenta",null,1);
-
             Random aleatorio =new Random(System.currentTimeMillis());
             int intAleatorio = aleatorio.nextInt(900);
             aleatorio.setSeed(System.currentTimeMillis());
@@ -193,7 +244,10 @@ public class addNewCount extends BaseFragmentListener implements View.OnClickLis
             Long idResult = db.insert(Utilidades.TABLA_CUENTA,Utilidades.FIELD_ICON,values);
             Toast.makeText(getActivity(), "Cuenta Registrada" +idResult , Toast.LENGTH_SHORT).show();
             db.close();
+            onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.COUNTS, false, null);
 
         }
     }
+
+
 }

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gio.mscuentas.ConexionSQLiteHelper;
+import com.gio.mscuentas.Fragments.counts;
 import com.gio.mscuentas.Interfaces.ItemClickListener;
 import com.gio.mscuentas.Entidades.countModel;
 import com.gio.mscuentas.R;
@@ -29,6 +30,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
 
     ArrayList<countModel> listaUsuario;
     ArrayList<countModel> listFullCounts;
+    int position;
 
     ConexionSQLiteHelper conn;
     Context context;
@@ -51,6 +53,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
         TextView  named;
         TextView  pasword;
         ImageView see;
+        ImageView edit;
        public RelativeLayout idLayoutitem;
         public VHcount(@NonNull View itemView,final ItemClickListener listener) {
             super(itemView);
@@ -58,6 +61,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
             named = itemView.findViewById(R.id.nameItem);
             pasword = itemView.findViewById(R.id.passwordItem);
             see = itemView.findViewById(R.id.seeItem);
+            edit = itemView.findViewById(R.id.editItem);
             idLayoutitem = itemView.findViewById(R.id.idLayoutitem);
 
 
@@ -80,11 +84,25 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
                 public void onClick(View v) {
                     if (listener != null)
                     {
-                        int position = getAdapterPosition();
+                         position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION){
                             listener.onSpesificItem(v,getAdapterPosition());
 
                         }
+                    }
+                }
+            });
+
+            edit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null)
+                    {
+                     position = getAdapterPosition();
+                     if (position != RecyclerView.NO_POSITION)
+                     {
+                         listener.onEditItem(v,getAdapterPosition());
+                     }
                     }
                 }
             });
@@ -106,6 +124,10 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
     {
         this.clickListener = spesifcListener;
     }
+    public void setOnEditItem(ItemClickListener editItem) {
+        this.clickListener = editItem;
+    }
+
 
 
     @NonNull
@@ -119,14 +141,12 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
 
     @Override
     public void onBindViewHolder(@NonNull VHcount holder, int position) {
-        //countModel countmodel = listaUsuario.get(position);
         String nameCount = listaUsuario.get(position).getNameCount();
         String string = nameCount;
         String[] parts = string.split("#a!%bc");
         String name = parts[0]; // 19
         String key = parts[1];
         holder.named.setText(name);
-      //  String pasword = listaUsuario.get(position).getPassworCount();
         holder.pasword.setText(listaUsuario.get(position).getHidenPasword());
 
         switch (listaUsuario.get(position).getIcon().toString())
@@ -151,6 +171,12 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
                 break;
             case "7":
                 holder.icon.setImageResource(R.drawable.smartphone);
+                break;
+            case "8":
+                holder.icon.setImageResource(R.drawable.linkedin);
+                break;
+            case "9":
+                holder.icon.setImageResource(R.drawable.twitter);
                 break;
 
         }

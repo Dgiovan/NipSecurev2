@@ -12,6 +12,7 @@ public class countModel implements Serializable {
     private String hidenPasword ="***********" ;
 
     public countModel(String icon, String nameCount, String passworCount,String hidenPasword) {
+
         this.icon = icon;
         this.nameCount = nameCount;
         this.passworCount = passworCount;

@@ -5,8 +5,34 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.loging"
     android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvregistryLoging"
+        android:visibility="visible"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorBlue"
+        android:textStyle="bold"
+        android:gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/TextRegistry"/>
+    <TextView
+        android:id="@+id/tvLostcount"
+        android:visibility="gone"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorRed"
+        android:textStyle="bold"
+        android:paddingRight="10dp"
+        android:gravity="right"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/TextLostCount"/>
     <LinearLayout
-        android:paddingTop="20dp"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -44,18 +70,11 @@
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
-        <TextView
-            android:id="@+id/tvregistryLoging"
-            android:layout_marginTop="20dp"
-            android:textColor="@color/colorBlue"
-            android:textStyle="bold"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TextRegistry"/>
+
     </LinearLayout>
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom">

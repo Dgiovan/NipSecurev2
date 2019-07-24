@@ -75,6 +75,7 @@ public class pin extends BaseFragmentListener implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_pin, container, false);
+
         numberOneTextView = v.findViewById(R.id.numberOneTextView);
         numberTwoTextView = v.findViewById(R.id.numberTwoTextView);
         numberThreeTextView = v.findViewById(R.id.numberThreeTextView);
@@ -186,7 +187,6 @@ public class pin extends BaseFragmentListener implements View.OnClickListener {
                 else {
                     if (previousPin.equals(currentPin)) {
                         if (savePinToKeyStore(currentPin)) {
-                            Log.d(TAG,"Everything ok, we can go to biometrics");
                             onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.COUNTS,false,null);
                         }
                     }

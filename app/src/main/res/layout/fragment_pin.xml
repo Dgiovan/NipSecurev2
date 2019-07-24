@@ -224,16 +224,18 @@
             android:id="@+id/buttonOne"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="1"
             android:layout_marginLeft="2dp"
-            android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"
+            android:layout_marginRight="2dp"
             android:background="@color/colorGreenlight"
+            android:text="1"
             android:textColor="@color/colorWhite"
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toStartOf="@+id/guideline9"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/buttonThree"
@@ -374,7 +376,8 @@
             android:id="@+id/buttonBack"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:text="Back"
+            android:text="«"
+            android:textSize="21sp"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
             android:layout_marginTop="2dp"

@@ -2,6 +2,7 @@ package com.gio.mscuentas.Fragments;
 
 
 import android.app.AlertDialog;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -9,9 +10,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v13.view.inputmethod.EditorInfoCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.view.menu.MenuItemImpl;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
@@ -24,10 +24,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
-
 import com.gio.mscuentas.Adapters.RecyclerItemTouchHelper;
 import com.gio.mscuentas.Adapters.countAdapter;
 import com.gio.mscuentas.ConexionSQLiteHelper;
@@ -55,7 +55,19 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
     AlertDialog alertDialog;
     int showhiden=0;
     boolean isLogout;
+    String nameCount;
     LinearLayout Layoutcoun;
+
+
+
+    private EditText user;
+    private EditText pass;
+    ImageView one,two,tree,four,five,six,seven,eigth,nine;
+    public String iconSelected="";
+    String names;
+    String passw;
+
+
     public counts() {
         // Required empty public constructor
     }
@@ -78,6 +90,7 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v=inflater.inflate(R.layout.fragment_counts, container, false);
+
         addnewcount = v.findViewById(R.id.newCount);
         Layoutcoun = v.findViewById(R.id.imageNewuser);
         Layoutcoun.setOnClickListener(this);
@@ -106,6 +119,7 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
             adapter = new countAdapter(getContext(),listCount);
             adapter.setListener(this);
             adapter.setSpesifcListener(this);
+            adapter.setOnEditItem(this);
             rvcCounts.setAdapter(adapter);
 
 
@@ -182,11 +196,12 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
         {
             case R.id.imageNewuser:
             case R.id.newCount:
-                onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.ADDNEWCOUNT,true,null);
+                onFragmentInteractionListener.onFragmentInteractionChangeFragment(FragmentType.ADDNEWCOUNT,false,null);
                 break;
             case R.id.logoutCount:
                 if (alertDialog == null) {
                     alertDialog = new AlertDialog.Builder(getActivity() ).create();
+                    alertDialog.setIcon(R.drawable.doorknob);
                     alertDialog.setCancelable(false);
                     alertDialog.setTitle("msCuentas");
                     alertDialog.setMessage("¿Estás seguro de querer cerrar sesión?");
@@ -209,6 +224,7 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
                 }
 
                 break;
+
         }
     }
 
@@ -228,6 +244,7 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
     @Override
     public void onSpesificItem(View view, int Position) {
+
         Log.e(TAG,String.valueOf(showhiden));
         if (showhiden==0)
         {
@@ -244,6 +261,23 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
         }
 
     }
+
+    @Override
+    public void onEditItem(View view, int Position) {
+
+        nameCount = listCount.get(Position).getNameCount();
+        String string = nameCount;
+        String[] parts = string.split("#a!%bc");
+        String name = parts[0]; // 19
+
+        ShowDialog();
+
+
+    }
+
+
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -262,17 +296,232 @@ public class counts extends BaseFragmentListener implements View.OnClickListener
 
     @Override
     public void onSwipe(RecyclerView.ViewHolder viewHolder, int direction, int position) {
-
         adapter.removeItem(viewHolder.getAdapterPosition());
-
-        SQLiteDatabase db = conn.getWritableDatabase();
         String [] parametros ={listCount.get(position).getNameCount()};
-        db.delete(Utilidades.TABLA_CUENTA,Utilidades.FIELD_NAME+"=?",parametros);
-        Toast.makeText(getActivity(), "Cuenta Eliminada"  , Toast.LENGTH_SHORT).show();
+        String nameCount = listCount.get(position).getNameCount();
+        String string = nameCount;
+        String[] parts = string.split("#a!%bc");
+        String name = parts[0]; // 19
+
+        delateCountDialog(parametros,name);
+
+
+    }
+
+
+    public void updateCount(String icon,String password)
+    {
+        SQLiteDatabase db = conn.getWritableDatabase();
+        String [] parametros ={nameCount};
+        ContentValues values = new ContentValues();
+        values.put(Utilidades.FIELD_ICON,icon);
+        values.put(Utilidades.FIELD_PASSWORD,password);
+
+        db.update(Utilidades.TABLA_CUENTA,values,Utilidades.FIELD_NAME+"=?",parametros);
         db.close();
         initRecycler();
+    }
+    public void ShowDialog(){
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(getActivity());
+        LayoutInflater inflate = getActivity().getLayoutInflater();
+        View vie = inflate.inflate(R.layout.updatecount,null);
+        pass = vie.findViewById(R.id.updatePassword);
 
+        one = vie.findViewById(R.id.editicoOne);
+        one.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="1";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        two = vie.findViewById(R.id.editicoTwo);
+        two.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="2";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        tree = vie.findViewById(R.id.editicoThree);
+        tree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                iconSelected ="3";
+            }
+        });
+        four = vie.findViewById(R.id.editiconFor);
+        four.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="4";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        five = vie.findViewById(R.id.editicoFive);
+        five.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="5";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        six = vie.findViewById(R.id.editicoSix);
+        six.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="6";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        seven = vie.findViewById(R.id.editicoSeven);
+        seven.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="7";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        eigth = vie.findViewById(R.id.editicoEigth);
+        eigth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="8";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+            }
+        });
+        nine = vie.findViewById(R.id.editicoNine);
+        nine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iconSelected ="9";
+                one.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                two.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                tree.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                four.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                five.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                six.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                seven.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                eigth.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_nonebacgrount));
+                nine.setBackground(ContextCompat.getDrawable(getActivity(), R.drawable.icon_bacground));
+            }
+        });
 
+        builder.setView(vie)
+                .setTitle("Editar Cuenta")
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setPositiveButton("Actualizar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        passw = pass.getText().toString();
+                        updateCount(iconSelected,passw);
+                    }
+                });
+        builder.create();
+        builder.show();
+    }
+
+    public void delateCountDialog(final String[] name,String getname)
+    {
+        if (alertDialog == null) {
+            alertDialog = new AlertDialog.Builder(getActivity() ).create();
+            alertDialog.setIcon(R.drawable.trash);
+            alertDialog.setCancelable(false);
+            alertDialog.setTitle("msCuentas");
+            alertDialog.setMessage("¿Estás seguro de querer borrar la cuenta "+getname+ "?");
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "borrar",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            SQLiteDatabase db = conn.getWritableDatabase();
+                            db.delete(Utilidades.TABLA_CUENTA,Utilidades.FIELD_NAME+"=?",name);
+                            Toast.makeText(getActivity(), "Cuenta Eliminada"  , Toast.LENGTH_SHORT).show();
+                            db.close();
+                            initRecycler();
+                            alertDialog = null;
+                        }
+                    });
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Cancelar",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            Toast.makeText(getActivity(), "Uff por poco"  , Toast.LENGTH_SHORT).show();
+                            alertDialog = null;
+                        }
+                    });
+            alertDialog.show();
+        }
 
     }
 }

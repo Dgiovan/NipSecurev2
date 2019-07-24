@@ -25,7 +25,7 @@ public class loging extends BaseFragmentListener implements View.OnClickListener
 private static final String TAG = loging.class.getSimpleName();
 View v;
 Button loging;
-TextView registry;
+TextView registry,lostCount;
 private  String userCredential;
 EditText user,
          password;
@@ -54,11 +54,11 @@ public static loging newInstance(OnFragmentInteractionListener onFragmentInterac
         userCredential =KeyStoreHelper.getInstance().readToken();
         loging= v.findViewById(R.id.buttonLogin);
         registry = v.findViewById(R.id.tvregistryLoging);
+        lostCount = v.findViewById(R.id.tvLostcount);
         user = v.findViewById(R.id.userFielLoging);
         password = v.findViewById(R.id.passwordFieldLoging);
         registry.setOnClickListener(this);
-        // Inflate the layout for this fragment
-
+        lostCount.setOnClickListener(this);
         loging.setOnClickListener(this);
 
 

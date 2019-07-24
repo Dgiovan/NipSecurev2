@@ -11,14 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
-            android:textColor="@color/colorBlack"
-            android:layout_gravity="center"
-            android:textSize="20sp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_marginBottom="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/SelectIcon"/>
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/icback"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_backspace_black_24dp"/>
+            <TextView
+                android:layout_weight="1"
+                android:textColor="@color/colorBlack"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/SelectIcon"/>
+        </LinearLayout>
+
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -59,6 +73,21 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:src="@drawable/gmail" />
+
+                <ImageView
+                    android:id="@+id/icoEigth"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/linkedin" />
+                <ImageView
+                    android:id="@+id/icoNine"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/twitter" />
 
                 <ImageView
                     android:id="@+id/iconFor"
