@@ -9,7 +9,7 @@
         android:id="@+id/tvregistryLoging"
         android:visibility="visible"
         android:layout_marginTop="10dp"
-        android:textColor="@color/colorBlue"
+        android:textColor="@color/colorBlack"
         android:textStyle="bold"
         android:gravity="right"
         android:layout_marginRight="15dp"
@@ -52,6 +52,7 @@
             android:background="@drawable/simple_roud_fields"
             android:inputType="textPersonName"
             android:hint="@string/hintUser"
+            android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorgray"
             android:imeOptions="actionNext"
             android:layout_width="match_parent"
@@ -65,8 +66,9 @@
             android:background="@drawable/simple_roud_fields"
             android:inputType="textPassword"
             android:imeOptions="actionDone"
-            android:hint="@string/hintPassword"
+            android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorgray"
+            android:hint="@string/hintPassword"
             android:layout_width="match_parent"
             android:layout_height="40dp" />
 
@@ -84,9 +86,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="14dp"
+
             android:background="@drawable/backgroundbutton"
             android:text="@string/ButtonLoging"
             android:textColor="@color/colorWhite" />

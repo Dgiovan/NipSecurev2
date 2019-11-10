@@ -1,7 +1,8 @@
 package com.gio.mscuentas.Adapters;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -50,7 +51,7 @@ public class countAdapter extends RecyclerView.Adapter <countAdapter.VHcount> im
         ImageView see;
         ImageView edit;
        public RelativeLayout idLayoutitem;
-        public VHcount(@NonNull View itemView,final ItemClickListener listener) {
+        public VHcount(@NonNull View itemView, final ItemClickListener listener) {
             super(itemView);
             icon = itemView.findViewById(R.id.iconItem);
             named = itemView.findViewById(R.id.nameItem);

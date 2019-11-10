@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3DD7A1</color>
-    <color name="colorPrimaryDark">#3DD7A1</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#61C4F8</color>
     <color name="colorRed">#F30505</color>
 
     <color name="colorBackground">#F7F6FB</color>
@@ -12,4 +12,6 @@
     <color name="colorCoral">#07FD92A4</color>
     <color name="colorGreenlight">#3DD7A1</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorBlackAlpha">#D8000000</color>
+
 </resources>
