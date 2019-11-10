@@ -2,7 +2,7 @@ package com.gio.mscuentas.Fragments;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.gio.mscuentas.Interfaces.OnFragmentInteractionListener;
 

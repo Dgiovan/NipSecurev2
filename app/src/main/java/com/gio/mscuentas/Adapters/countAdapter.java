@@ -1,27 +1,22 @@
 package com.gio.mscuentas.Adapters;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.gio.mscuentas.ConexionSQLiteHelper;
-import com.gio.mscuentas.Fragments.counts;
 import com.gio.mscuentas.Interfaces.ItemClickListener;
 import com.gio.mscuentas.Entidades.countModel;
 import com.gio.mscuentas.R;
-import com.gio.mscuentas.Utils.Utilidades;
 
 import java.util.ArrayList;
 import java.util.List;
